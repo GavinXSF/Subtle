@@ -1,7 +1,6 @@
 package com.example.subtle;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
             obj_name = v.findViewById(R.id.name);
             obj_description = v.findViewById(R.id.description);
             obj_initDate = v.findViewById(R.id.initData);
-            obj_loop = v.findViewById(R.id.loop);
+            obj_loop = v.findViewById(R.id.loop_add);
         }
     }
 
