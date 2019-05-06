@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView myRV;
     private List<Obj> myObj;
 
-    private PendingIntent pendingIntent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,31 +130,6 @@ public class MainActivity extends AppCompatActivity {
                         loop = preferences.getString(name+"loop",""));
                 myObj.add(obj);
 
-                //set loop alarm
-                String[] initDateArray = initDate.split("-");
-                String[] loopArray = loop.split("-");
-
-                String initYear = initDateArray[0];
-                String initMonth = initDateArray[1];
-                String initDay = initDateArray[2];
-
-                String loopYear = loopArray[0];
-                String loopMonth = loopArray[1];
-                String loopDay = loopArray[2];
-
-                Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
-                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
-
-                AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                int interval = (((Integer.parseInt(loopYear) * 12 + Integer.parseInt(loopMonth)) * 30 + Integer.parseInt(loopDay)) * 24 * 60 * 60 * 1000);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.YEAR, Integer.parseInt(initYear));
-                calendar.set(Calendar.MONTH,Integer.parseInt(initMonth));
-                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(initDay));
-
-                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
             }
         }
 

@@ -24,7 +24,7 @@
             android:launchMode="singleTask">
         </activity>
 
-        <receiver android:name=".AlarmReceiver"/>
+
 
     </application>
     
