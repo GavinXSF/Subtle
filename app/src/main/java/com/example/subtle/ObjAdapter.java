@@ -47,8 +47,39 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
         }
         holder.obj_name.setText(obj.getName());
         holder.obj_description.setText(obj.getDescription());
-        holder.obj_initDate.setText(obj.getInitDate());
-        holder.obj_loop.setText(obj.getLoop());
+
+        String tempDate = "From " + obj.getInitDate();
+        holder.obj_initDate.setText(tempDate);
+
+        StringBuilder tempLoop = new StringBuilder();
+        int cnt = 0;
+        for (String temp : obj.getLoop().split("-")){
+            if (!temp.equals("0")){
+                switch (cnt){
+                    case 0:
+                        tempLoop.append("Every ").append(temp).append(" years");
+                        break;
+                    case 1:
+                        if(tempLoop.toString().equals("")){
+                            tempLoop.append("Every ").append(temp).append(" months");
+                        }else{
+                            tempLoop.append(" ").append(temp).append(" months");
+                        }
+                        break;
+                    case 2:
+                        if(tempLoop.toString().equals("")){
+                            tempLoop.append("Every ").append(temp).append(" days");
+                        }else{
+                            tempLoop.append(" ").append(temp).append(" days");
+                        }
+                        break;
+                }
+                cnt += 1;
+            }
+        }
+        if (tempLoop.length() == 0)
+            tempLoop.append("Invalid reminder interval.");
+        holder.obj_loop.setText(tempLoop);
     }
 
     @Override
