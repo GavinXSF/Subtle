@@ -31,6 +31,12 @@
             android:launchMode="singleTask"/>
 
         <receiver android:name=".AlarmReceiver" />
+        <activity android:name=".AddObjActivity"
+            android:launchMode="singleTask">
+        </activity>
+
+
+
     </application>
 
 </manifest>
