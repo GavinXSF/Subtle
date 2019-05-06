@@ -1,5 +1,6 @@
 package com.example.subtle;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,11 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         Obj obj = objList.get(position);
-        holder.obj_img.setImageResource(obj.getImgID());
+        if(obj.getImgID().equals("")){
+            holder.obj_img.setImageResource(R.drawable.add);
+        }else{
+            holder.obj_img.setImageURI(Uri.parse(obj.getImgID()));
+        }
         holder.obj_name.setText(obj.getName());
         holder.obj_description.setText(obj.getDescription());
         holder.obj_initDate.setText(obj.getInitDate());

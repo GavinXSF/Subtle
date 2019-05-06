@@ -1,13 +1,15 @@
 package com.example.subtle;
 
+import android.net.Uri;
+
 public class Obj {
     private String name;
     private String description;
-    private int imgID;
+    private String imgID;
     private String initDate;
     private String loop;
 
-    public Obj(String name, String description, int imgID, String initDate, String loop){
+    public Obj(String name, String description, String imgID, String initDate, String loop){
         this.name = name;
         this.description = description;
         this.imgID = imgID;
@@ -23,7 +25,7 @@ public class Obj {
         return this.description;
     }
 
-    public int getImgID() {
+    public String getImgID() {
         return this.imgID;
     }
     public String getInitDate(){

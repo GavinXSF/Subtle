@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView myRV;
     private List<Obj> myObj;
     
-    private static final int RESULT_LOAD_IMAGE = 1;
-    ImageView picture_input;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +46,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
-        //picture from user gallery
-        setContentView(R.layout.activity_add_obj);
-        picture_input = (ImageView) findViewById(R.id.picture_input);
 
-        picture_input.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                switch(v.getId()){
-                    case R.id.picture_input:
-                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                        break;
-                }
-            }
-        });
     }
-    
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
-            picture_input.setImageURI(selectedImage);
-        }
-    }
+
+
 
     @Override
     public void onResume(){
@@ -86,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Objects",MODE_PRIVATE);
         String ObjNameList = preferences.getString("ObjNameList","");
         if(ObjNameList.equals("")){
-            Obj obj1 = new Obj("TestObj","Description",R.drawable.add,"initDate","loop");
-            myObj.add(obj1);
+//            Obj obj1 = new Obj("TestObj","Description",Null,"initDate","loop");
+//            myObj.add(obj1);
         }else{
             for (String name:ObjNameList.split("--")){
                 Obj obj = new Obj(name,
                         preferences.getString(name+"description",""),
-                        R.drawable.add,
+                        preferences.getString(name+"Uri",""),
                         preferences.getString(name+"initDate",""),
                         preferences.getString(name+"loop",""));
                 myObj.add(obj);
