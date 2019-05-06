@@ -78,7 +78,7 @@ public class AddObjActivity extends AppCompatActivity {
             public void onClick(View v){
                 switch(v.getId()){
                     case R.id.picture_input:
-                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        Intent galleryIntent = new Intent(Intent. ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                         break;
                 }
