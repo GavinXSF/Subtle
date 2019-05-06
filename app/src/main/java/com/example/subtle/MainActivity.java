@@ -2,6 +2,7 @@ package com.example.subtle;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,11 +41,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        initObj();
+        ObjAdapter objAdapter = new ObjAdapter(myObj);
+        myRV.setAdapter(objAdapter);
+    }
+
     public void initObj(){
-        Obj obj1 = new Obj("Name","Description",R.drawable.add,"initDate","loop");
-        Obj obj2 = new Obj("Name2","Description",R.drawable.add,"initDate","loop");
-        myObj.add(obj1);
-        myObj.add(obj2);
+        myObj = new ArrayList<Obj>();
+        SharedPreferences preferences = getSharedPreferences("Objects",MODE_PRIVATE);
+        String ObjNameList = preferences.getString("ObjNameList","");
+        if(ObjNameList.equals("")){
+            Obj obj1 = new Obj("TestObj","Description",R.drawable.add,"initDate","loop");
+            myObj.add(obj1);
+        }else{
+            for (String name:ObjNameList.split("--")){
+                Obj obj = new Obj(name,
+                        preferences.getString(name+"description",""),
+                        R.drawable.add,
+                        preferences.getString(name+"initDate",""),
+                        preferences.getString(name+"loop",""));
+                myObj.add(obj);
+            }
+        }
 
     }
 }
