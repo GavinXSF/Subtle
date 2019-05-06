@@ -1,5 +1,8 @@
 package com.example.subtle;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -12,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class AddObjActivity extends AppCompatActivity {
 //    private String name, start_year,start_month,start_day,loop_year,loop_month,loop_day,description;
@@ -84,6 +89,7 @@ public class AddObjActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
