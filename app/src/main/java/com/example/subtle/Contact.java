@@ -1,13 +1,35 @@
 package com.example.subtle;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+public class Contact {
 
-public class Contact extends AppCompatActivity {
+    private String name;
+    private String hobby;
+    private String photo;
+    private String birthday;
+    private String loop;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact);
+    public Contact(String name, String description, String imgID, String initDate, String loop){
+        this.name = name;
+        this.hobby = description;
+        this.photo = imgID;
+        this.birthday = initDate;
+        this.loop = loop;
+    }
+
+
+    public String getName(){
+        return this.name;
+    }
+    public String  getHobby(){
+        return this.hobby;
+    }
+    public String getPhoto() {
+        return this.photo;
+    }
+    public String getBirthday(){
+        return this.birthday;
+    }
+    public String getLoop(){
+        return this.loop;
     }
 }

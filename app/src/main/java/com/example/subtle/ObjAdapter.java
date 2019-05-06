@@ -78,7 +78,7 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
             cnt += 1;
         }
         if (tempLoop.length() == 0)
-            tempLoop.append("Invalid reminder interval.");
+            tempLoop.append("No reminder");
         holder.obj_loop.setText(tempLoop);
     }
 

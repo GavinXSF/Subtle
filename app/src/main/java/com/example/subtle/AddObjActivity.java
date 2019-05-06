@@ -21,7 +21,6 @@ import java.util.Calendar;
 public class AddObjActivity extends AppCompatActivity {
 //    private String name, start_year,start_month,start_day,loop_year,loop_month,loop_day,description;
     private String name, loop, initDate, description, imgUri="";
-    private int imgID;
 
     private static final int RESULT_LOAD_IMAGE = 1;
     ImageView picture_input;

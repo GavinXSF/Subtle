@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_corner"
+    android:orientation="horizontal"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    >
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/contact_img"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/add"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="3dp"
+            android:text="name"
+            android:textColor="@color/colorIcon_Text"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/contact_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Birthday"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginTop="3dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/contact_loop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="loop"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginTop="3dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/contact_hobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="hobby"
+            android:textColor="@color/colorSecondText"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

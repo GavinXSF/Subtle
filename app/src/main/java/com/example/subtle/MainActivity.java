@@ -1,13 +1,10 @@
 package com.example.subtle;
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,9 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setTitle("Subtle - Objects List");
 
         //display objects
         myObj = new ArrayList<Obj>();
@@ -42,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         myRV.setLayoutManager(layoutManager);
         final ObjAdapter objAdapter = new ObjAdapter(myObj);
         myRV.setAdapter(objAdapter);
-        RecyclerViewUtil util=new RecyclerViewUtil(this,myRV);
 
+        RecyclerViewUtil util=new RecyclerViewUtil(this,myRV);
         util.setOnItemLongClickListener(new RecyclerViewUtil.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(final int position, View view) {
@@ -110,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         contactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Contact.class));
+                startActivity(new Intent(MainActivity.this, ContactActivity.class));
             }
         });
     }

@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Contact"></activity>
+        <activity android:name=".AddContactActivity"/>
+        <activity android:name=".ContactActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">
@@ -24,13 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddObjActivity"
+            android:launchMode="singleTask"/>
 
-        <activity android:name=".AddObjActivity"
-            android:launchMode="singleTask">
-        </activity>
-
-        <receiver android:name=".AlarmReceiver"/>
-
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddContactActivity">
+
+    <TextView
+        android:id="@+id/contact_name_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/contact_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:hint="Input name here"
+        android:textColorHint="@color/colorLightPrimary"
+        app:layout_constraintStart_toStartOf="@+id/birthday_month"
+        app:layout_constraintTop_toTopOf="@+id/contact_name_add" />
+
+    <TextView
+        android:id="@+id/birthday_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Birthday"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_name_add" />
+
+    <TextView
+        android:id="@+id/contact_loop_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Remider Interval (Y/M/D)"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthday_year" />
+
+    <TextView
+        android:id="@+id/hobby_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Hobby"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_loop_year" />
+
+    <EditText
+        android:id="@+id/hobby_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:hint="Input personal hobbies here"
+        android:textColorHint="@color/colorLightPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_add" />
+
+    <Spinner
+        android:id="@+id/birthday_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:entries="@array/year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthday_add" />
+
+    <Spinner
+        android:id="@+id/birthday_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="50dp"
+        android:entries="@array/month"
+        app:layout_constraintStart_toEndOf="@+id/birthday_year"
+        app:layout_constraintTop_toTopOf="@+id/birthday_year" />
+
+    <Spinner
+        android:id="@+id/birthday_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="50dp"
+        android:entries="@array/day"
+        app:layout_constraintStart_toEndOf="@+id/birthday_month"
+        app:layout_constraintTop_toTopOf="@+id/birthday_month" />
+
+    <Spinner
+        android:id="@+id/contact_loop_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:entries="@array/loop_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_loop_add" />
+
+    <Spinner
+        android:id="@+id/contact_loop_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="50dp"
+        android:entries="@array/loop_month"
+        app:layout_constraintStart_toEndOf="@+id/birthday_year"
+        app:layout_constraintTop_toTopOf="@+id/contact_loop_year" />
+
+    <Spinner
+        android:id="@+id/contact_loop_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginStart="50dp"
+        android:entries="@array/loop_day"
+        app:layout_constraintStart_toEndOf="@+id/birthday_month"
+        app:layout_constraintTop_toTopOf="@+id/contact_loop_month" />
+
+    <TextView
+        android:id="@+id/contact_img_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Avatar"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_input" />
+
+    <ImageView
+        android:id="@+id/contact_picture_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/contact_img_add"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_input"
+        app:srcCompat="@drawable/input_pic" />
+
+    <Button
+        android:id="@+id/contact_btn_confirm"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_done"
+        app:layout_constraintBottom_toBottomOf="@+id/contact_picture_input"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
