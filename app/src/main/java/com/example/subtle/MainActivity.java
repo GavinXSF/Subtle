@@ -102,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button contactBtn = findViewById(R.id.contact);
+        contactBtn.bringToFront();
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Contact.class));
+            }
+        });
     }
 
     @Override
@@ -130,8 +139,10 @@ public class MainActivity extends AppCompatActivity {
                         loop = preferences.getString(name+"loop",""));
                 myObj.add(obj);
 
+
             }
         }
 
     }
+
 }

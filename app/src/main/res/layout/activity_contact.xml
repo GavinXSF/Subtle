@@ -7,14 +7,14 @@
     tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/myRV"
+        android:id="@+id/peopleRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="194dp"
         tools:layout_editor_absoluteY="195dp" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/addContact"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="16dp"
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/contact"
+        android:id="@+id/mainPage"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
