@@ -23,9 +23,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView myRV;
     private List<Obj> myObj;
-    
 
-    
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +100,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
+        Button contactBtn = findViewById(R.id.contact);
+        contactBtn.bringToFront();
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Contact.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -133,4 +143,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 }
