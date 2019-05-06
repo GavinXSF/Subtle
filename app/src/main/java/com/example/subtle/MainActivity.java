@@ -104,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button contactBtn = findViewById(R.id.contact);
+        contactBtn.bringToFront();
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Contact.class));
+            }
+        });
     }
 
     @Override
@@ -148,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
 
                 AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                int interval = (((Integer.parseInt(loopYear) * 12 + Integer.parseInt(loopMonth)) * 30 + Integer.parseInt(loopDay)) * 24 * 60 * 60 * 1000);
+                int interval = (((Integer.parseInt(loopYear) * 12 + Integer.parseInt(loopMonth)) * 30 + Integer.parseInt(loopDay)) * 1000);
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
