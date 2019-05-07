@@ -8,11 +8,11 @@ public class Contact {
     private String birthday;
     private String loop;
 
-    public Contact(String name, String description, String imgID, String initDate, String loop){
+    public Contact(String name, String description, String imgID, String birthday, String loop){
         this.name = name;
         this.hobby = description;
         this.photo = imgID;
-        this.birthday = initDate;
+        this.birthday = birthday;
         this.loop = loop;
     }
 

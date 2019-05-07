@@ -28,7 +28,7 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
         this.setTitle("Subtle - Contacts List");
 
-        myContact = new ArrayList<Contact>();
+//        myContact = new ArrayList<Contact>();
         initContact();
         contactRV = findViewById(R.id.contactRV);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -59,8 +59,8 @@ public class ContactActivity extends AppCompatActivity {
                                 editor.remove(name+"loop");
                                 editor.remove("ContactNameList");
                                 if(cnt == 0){
-                                    if(contactAdapter.getItemCount()==1){
-                                        ContactNameList = ContactNameList.replace(name,"");
+                                    if(myContact.size()==1){
+                                        ContactNameList = "";
                                     }else {
                                         ContactNameList = ContactNameList.replace(name + "--", "");
                                     }
@@ -68,13 +68,14 @@ public class ContactActivity extends AppCompatActivity {
                                     ContactNameList = ContactNameList.replace("--" + name,"");
                                 }
                                 editor.putString("ContactNameList",ContactNameList);
+                                break;
                             }
                             cnt ++;
                         }
                         editor.apply();
-//                        initContact();
-//                        ContactAdapter contactAdapter= new ContactAdapter(myContact);
-//                        contactRV.setAdapter(contactAdapter);
+                        initContact();
+                        ContactAdapter contactAdapter= new ContactAdapter(myContact);
+                        contactRV.setAdapter(contactAdapter);
                     }
                 });
                 dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -123,8 +124,8 @@ public class ContactActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Contacts",MODE_PRIVATE);
         String ContactNameList = preferences.getString("ContactNameList","");
         if(ContactNameList.equals("")){
-//            Obj obj1 = new Obj("TestObj","Description",Null,"initDate","loop");
-//            myObj.add(obj1);
+            Contact tempContact = new Contact("No contact added","Try to add contact now! ","","YYYY-MM-DD","");
+            myContact.add(tempContact);
         }else{
             for (String name:ContactNameList.split("--")){
                 String birthday;

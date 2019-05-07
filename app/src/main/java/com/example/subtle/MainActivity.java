@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.os.Build;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -77,15 +78,20 @@ public class MainActivity extends AppCompatActivity {
                                 editor.remove(name+"loop");
                                 editor.remove("ObjNameList");
                                 if(cnt == 0){
-                                    if(objAdapter.getItemCount()==1){
-                                        ObjNameList = ObjNameList.replace(name,"");
+//                                    Toast.makeText(MainActivity.this,"AAA",Toast.LENGTH_LONG).show();
+                                    if(myObj.size()==1){
+//                                        Toast.makeText(MainActivity.this,"BBB",Toast.LENGTH_LONG).show();
+                                        ObjNameList = "";
                                     }else {
+//                                        Toast.makeText(MainActivity.this,"CCC",Toast.LENGTH_LONG).show();
                                         ObjNameList = ObjNameList.replace(name + "--", "");
                                     }
                                 }else{
+                                    Toast.makeText(MainActivity.this,"DDD",Toast.LENGTH_LONG).show();
                                     ObjNameList = ObjNameList.replace("--" + name,"");
                                 }
                                 editor.putString("ObjNameList",ObjNameList);
+                                break;
                             }
                             cnt ++;
                         }
@@ -144,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Objects",MODE_PRIVATE);
         String ObjNameList = preferences.getString("ObjNameList","");
         if(ObjNameList.equals("")){
-//            Obj obj1 = new Obj("TestObj","Description",Null,"initDate","loop");
-//            myObj.add(obj1);
+            Obj obj1 = new Obj("No object!","Add detailed description here!","","initDate","");
+            myObj.add(obj1);
         }else{
             for (String name:ObjNameList.split("--")){
                 String initDate;
@@ -171,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 String initD = initYear + initMonth + initDay;
                 int interval = (Integer.parseInt(loopYear) * 365 + Integer.parseInt(loopMonth) * 30 + Integer.parseInt(loopDay));
                 myObj.add(obj);
-                addEvent(title, dscrp, initD, interval);
+//                addEvent(title, dscrp, initD, interval);
             }
         }
     }
