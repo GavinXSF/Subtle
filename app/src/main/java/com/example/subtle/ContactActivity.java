@@ -59,8 +59,8 @@ public class ContactActivity extends AppCompatActivity {
                                 editor.remove(name+"loop");
                                 editor.remove("ContactNameList");
                                 if(cnt == 0){
-                                    if(contactAdapter.getItemCount()==1){
-                                        ContactNameList = ContactNameList.replace(name,"");
+                                    if(myContact.size()==1){
+                                        ContactNameList = "";
                                     }else {
                                         ContactNameList = ContactNameList.replace(name + "--", "");
                                     }
@@ -68,6 +68,7 @@ public class ContactActivity extends AppCompatActivity {
                                     ContactNameList = ContactNameList.replace("--" + name,"");
                                 }
                                 editor.putString("ContactNameList",ContactNameList);
+                                break;
                             }
                             cnt ++;
                         }
