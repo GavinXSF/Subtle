@@ -38,11 +38,11 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position){
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Obj obj = objList.get(position);
-        if(obj.getImgID().equals("")){
+        if (obj.getImgID().equals("")) {
             holder.obj_img.setImageResource(R.drawable.default_obj);
-        }else{
+        } else {
             holder.obj_img.setImageURI(Uri.parse(obj.getImgID()));
         }
         holder.obj_name.setText(obj.getName());
@@ -53,32 +53,37 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
 
         StringBuilder tempLoop = new StringBuilder();
         int cnt = 0;
-        for (String temp : obj.getLoop().split("-")){
-            if (!temp.equals("0")){
-                switch (cnt){
-                    case 0:
-                        tempLoop.append("Every ").append(temp).append(" years");
-                        break;
-                    case 1:
-                        if(tempLoop.toString().equals("")){
-                            tempLoop.append("Every ").append(temp).append(" months");
-                        }else{
-                            tempLoop.append(" ").append(temp).append(" months");
-                        }
-                        break;
-                    case 2:
-                        if(tempLoop.toString().equals("")){
-                            tempLoop.append("Every ").append(temp).append(" days");
-                        }else{
-                            tempLoop.append(" ").append(temp).append(" days");
-                        }
-                        break;
-                }
-            }
-            cnt += 1;
-        }
-        if (tempLoop.length() == 0)
+        if (obj.getLoop() == "") {
             tempLoop.append("No reminder");
+        } else {
+            for (String temp : obj.getLoop().split("-")) {
+                if (!temp.equals("0")) {
+                    switch (cnt) {
+                        case 0:
+                            tempLoop.append("Every ").append(temp).append(" years");
+                            break;
+                        case 1:
+                            if (tempLoop.toString().equals("")) {
+                                tempLoop.append("Every ").append(temp).append(" months");
+                            } else {
+                                tempLoop.append(" ").append(temp).append(" months");
+                            }
+                            break;
+                        case 2:
+                            if (tempLoop.toString().equals("")) {
+                                tempLoop.append("Every ").append(temp).append(" days");
+                            } else {
+                                tempLoop.append(" ").append(temp).append(" days");
+                            }
+                            break;
+                    }
+                }
+                cnt += 1;
+            }
+            if (tempLoop.length() == 0)
+                tempLoop.append("No reminder");
+
+        }
         holder.obj_loop.setText(tempLoop);
     }
 

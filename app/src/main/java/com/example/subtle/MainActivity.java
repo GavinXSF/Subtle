@@ -121,19 +121,20 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Objects",MODE_PRIVATE);
         String ObjNameList = preferences.getString("ObjNameList","");
         if(ObjNameList.equals("")){
-//            Obj obj1 = new Obj("TestObj","Description",Null,"initDate","loop");
-//            myObj.add(obj1);
+            Obj obj1 = new Obj("No object!","Add detailed description here!","","initDate","");
+            myObj.add(obj1);
         }else{
-            for (String name:ObjNameList.split("--")){
-                String initDate;
-                String loop;
-                Obj obj = new Obj(name,
-                        preferences.getString(name+"description",""),
-                        preferences.getString(name+"Uri",""),
-                        initDate = preferences.getString(name+"initDate",""),
-                        loop = preferences.getString(name+"loop",""));
-                myObj.add(obj);
+            String[] objNames = ObjNameList.split("--");
 
+                for (String name:objNames){
+                    String initDate;
+                    String loop;
+                    Obj obj = new Obj(name,
+                            preferences.getString(name+"description",""),
+                            preferences.getString(name+"Uri",""),
+                            initDate = preferences.getString(name+"initDate",""),
+                            loop = preferences.getString(name+"loop",""));
+                    myObj.add(obj);
 
             }
         }

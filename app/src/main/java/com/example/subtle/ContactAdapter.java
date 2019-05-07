@@ -53,6 +53,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         StringBuilder tempLoop = new StringBuilder();
         int cnt = 0;
+        if(contact.getLoop().equals("")){
+            tempLoop.append("No reminder");
+        }else{
         for (String temp : contact.getLoop().split("-")){
             if (!temp.equals("0")){
                 switch (cnt){
@@ -78,7 +81,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             cnt += 1;
         }
         if (tempLoop.length() == 0)
-            tempLoop.append("No reminder");
+            tempLoop.append("No reminder");}
+
         holder.contact_loop.setText(tempLoop);
     }
 
