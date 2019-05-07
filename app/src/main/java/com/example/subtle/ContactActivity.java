@@ -72,9 +72,9 @@ public class ContactActivity extends AppCompatActivity {
                             cnt ++;
                         }
                         editor.apply();
-                        initContact();
-                        ContactAdapter contactAdapter= new ContactAdapter(myContact);
-                        contactRV.setAdapter(contactAdapter);
+//                        initContact();
+//                        ContactAdapter contactAdapter= new ContactAdapter(myContact);
+//                        contactRV.setAdapter(contactAdapter);
                     }
                 });
                 dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

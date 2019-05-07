@@ -41,7 +41,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position){
         Contact contact = contactList.get(position);
         if(contact.getPhoto().equals("")){
-            holder.contact_photo.setImageResource(R.drawable.add);
+            holder.contact_photo.setImageResource(R.drawable.default_contact);
         }else{
             holder.contact_photo.setImageURI(Uri.parse(contact.getPhoto()));
         }

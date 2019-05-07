@@ -41,7 +41,7 @@ public class ObjAdapter extends RecyclerView.Adapter<ObjAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         Obj obj = objList.get(position);
         if(obj.getImgID().equals("")){
-            holder.obj_img.setImageResource(R.drawable.add);
+            holder.obj_img.setImageResource(R.drawable.default_obj);
         }else{
             holder.obj_img.setImageURI(Uri.parse(obj.getImgID()));
         }

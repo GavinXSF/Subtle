@@ -75,13 +75,13 @@ public class AddContactActivity extends AppCompatActivity {
 
 
         //picture from user gallery
-        picture_input = findViewById(R.id.contact_picture_input);
+        picture_input = (ImageView) findViewById(R.id.contact_picture_input);
 
         picture_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 switch(v.getId()){
-                    case R.id.picture_input:
+                    case R.id.contact_picture_input:
                         Intent galleryIntent = new Intent(Intent. ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                         break;
