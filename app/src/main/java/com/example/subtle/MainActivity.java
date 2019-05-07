@@ -30,7 +30,8 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView myRV;
     private List<Obj> myObj;
-    private int count = 0;
+    private int calCount = 0;
+    private long accountID = 0;
 
     private static String CALANDER_URL = "content://com.android.calendar/calendars";
     private static String CALANDER_EVENT_URL = "content://com.android.calendar/events";
@@ -110,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count == 0){
+                if(calCount == 0){
                     addCal();
-                    count = 1;
+                    calCount = 1;
                 }
 
                 Intent intent = new Intent(MainActivity.this,AddObjActivity.class);
@@ -214,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
         }else{
            // accountUri = cr.insert(uri, contentValues);
         }
+        //accountID = Long.parseLong(accountUri.getLastPathSegment());
+        System.out.println("ID = " + accountID);
     }
 
 
@@ -240,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(CalendarContract.Events.RDATE, initDate);
         contentValues.put(CalendarContract.Events.TITLE, title);
         contentValues.put(CalendarContract.Events.DESCRIPTION, description);
-        contentValues.put(CalendarContract.Events.CALENDAR_ID, 2);
+        contentValues.put(CalendarContract.Events.CALENDAR_ID, 1);
         contentValues.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
         contentValues.put(CalendarContract.Events.GUESTS_CAN_INVITE_OTHERS, "1");
         contentValues.put(CalendarContract.Events.GUESTS_CAN_SEE_GUESTS, "1");
