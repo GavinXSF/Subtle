@@ -1,10 +1,18 @@
 package com.example.subtle;
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.CalendarContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,14 +20,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView myRV;
     private List<Obj> myObj;
+    private int count = 0;
+
+    private static String CALANDER_URL = "content://com.android.calendar/calendars";
+    private static String CALANDER_EVENT_URL = "content://com.android.calendar/events";
+    private static String CALANDER_REMIDER_URL = "content://com.android.calendar/reminders";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(count == 0){
+                    addCal();
+                    count = 1;
+                }
+
                 Intent intent = new Intent(MainActivity.this,AddObjActivity.class);
                 startActivity(intent);
             }
@@ -127,17 +149,115 @@ public class MainActivity extends AppCompatActivity {
             for (String name:ObjNameList.split("--")){
                 String initDate;
                 String loop;
+                String description;
                 Obj obj = new Obj(name,
-                        preferences.getString(name+"description",""),
+                       description = preferences.getString(name+"description",""),
                         preferences.getString(name+"Uri",""),
                         initDate = preferences.getString(name+"initDate",""),
                         loop = preferences.getString(name+"loop",""));
+
+                String[] initDateArray = initDate.split("-");
+                String[] loopArray = loop.split("-");
+                String initYear = initDateArray[0];
+                String initMonth = initDateArray[1];
+                String initDay = initDateArray[2];
+                String loopYear = loopArray[0];
+                String loopMonth = loopArray[1];
+                String loopDay = loopArray[2];
+
+                String title = name;
+                String dscrp = description;
+                String initD = initYear + initMonth + initDay;
+                int interval = (Integer.parseInt(loopYear) * 365 + Integer.parseInt(loopMonth) * 30 + Integer.parseInt(loopDay));
                 myObj.add(obj);
-
-
+                addEvent(title, dscrp, initD, interval);
             }
         }
+    }
 
+    /**
+     * insert Cal
+     * @return
+     */
+    private void addCal(){
+
+        ContentResolver cr = getContentResolver();
+        Uri uri = CalendarContract.Calendars.CONTENT_URI;
+        StringBuilder sb = new StringBuilder();
+        Uri accountUri = null;
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CalendarContract.Calendars.ACCOUNT_NAME, "subtle");
+        contentValues.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
+        contentValues.put(CalendarContract.Calendars.NAME, "Subtle");
+        contentValues.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, "Subtle");
+        contentValues.put(CalendarContract.Calendars.CALENDAR_COLOR, "232323");
+        contentValues.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_OWNER);
+        contentValues.put(CalendarContract.Calendars.OWNER_ACCOUNT, "test_account");
+        contentValues.put(CalendarContract.Calendars.ALLOWED_REMINDERS, "METHOD_ALERT, METHOD_EMAIL, METHOD_ALARM");
+        contentValues.put(CalendarContract.Calendars.ALLOWED_ATTENDEE_TYPES, "TYPE_OPTIONAL, TYPE_REQUIRED, TYPE_RESOURCE");
+        contentValues.put(CalendarContract.Calendars.ALLOWED_AVAILABILITY, "AVAILABILITY_BUSY, AVAILABILITY_FREE, AVAILABILITY_TENTATIVE");
+        uri = uri
+                .buildUpon()
+                .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, "Test")
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL)
+                .build();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(PackageManager.PERMISSION_GRANTED == checkSelfPermission("android.permission.WRITE_CALENDAR")){
+                accountUri = cr.insert(uri, contentValues);
+            }else{
+               // return "Please grant access to calendar.";
+            }
+        }else{
+           // accountUri = cr.insert(uri, contentValues);
+        }
+    }
+
+
+
+
+
+    /**
+     * add Event
+     *
+     * @return
+     */
+    private void addEvent(String title, String description, String initDate, int interval){
+
+        Uri uri = CalendarContract.Events.CONTENT_URI;
+        Uri eventUri = null;
+        StringBuilder sb = new StringBuilder();
+
+        System.out.println("event!");
+
+        ContentResolver cr = getContentResolver();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CalendarContract.Events.DURATION, "PT10M");
+        contentValues.put(CalendarContract.Events.RRULE, "FREQ=DAILY; INTERVAL = " + interval);
+        contentValues.put(CalendarContract.Events.RDATE, initDate);
+        contentValues.put(CalendarContract.Events.TITLE, title);
+        contentValues.put(CalendarContract.Events.DESCRIPTION, description);
+        contentValues.put(CalendarContract.Events.CALENDAR_ID, 2);
+        contentValues.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+        contentValues.put(CalendarContract.Events.GUESTS_CAN_INVITE_OTHERS, "1");
+        contentValues.put(CalendarContract.Events.GUESTS_CAN_SEE_GUESTS, "1");
+
+        cr.insert(Uri.parse(CALANDER_EVENT_URL), contentValues);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(PackageManager.PERMISSION_GRANTED == checkSelfPermission("android.permission.WRITE_CALENDAR")){
+                eventUri = cr.insert(uri, contentValues);
+            }else{
+                //return "Please grant access to calendar.";
+            }
+        }else{
+            eventUri = cr.insert(uri, contentValues);
+        }
+        // get the event ID that is the last element in the Uri
+        //long eventID = Long.parseLong(eventUri.getLastPathSegment());
     }
 
 }
